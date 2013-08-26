@@ -3,7 +3,7 @@
 class Robot
 	attr_accessor :direction, :position_x, :position_y
 
-	def initialize (plane, x = 0, y = 0, direction = nil)
+	def initialize (plane, x = 0, y = 0, direction = "N")
 		@plane = plane
 
 		@position_x = x
@@ -16,13 +16,11 @@ class Robot
 	def left 
 		@direction = @direction + 90
 		@direction = @direction - 360 if @direction >= 360
-		puts self.to_s
 	end	
 
 	def right
 		@direction = @direction - 90
 		@direction = @direction + 360 if @direction < 0
-		puts self.to_s
 	end	
 
 	def move 
@@ -43,7 +41,6 @@ class Robot
 			@position_y = new_y
 			@position_x = new_x
 		end
-		puts self.to_s
 	end
 
 	def tele (x, y)
@@ -51,11 +48,10 @@ class Robot
 			@position_y = y
 			@position_x = x
 		end
-		puts self.to_s
 	end
 
 	def to_s
-		str = "x: #{@position_x} y: #{@position_y} direction: #{format_direction}"
+		"x: #{@position_x} y: #{@position_y} direction: #{format_direction}"
 	end
 
 	private 
@@ -73,12 +69,13 @@ class Robot
 	end	
 
 	def parse_direction (str)
-		direction = nil
-		direction = 0 if str == nil || str.upcase == 'N' 
+		
+		direction = 0 if str.upcase == 'N' 
 		direction = 90 if str.upcase == 'O' 
 		direction = 270 if str.upcase == 'E'
 		direction = 180 if str.upcase == 'S' 
 		direction.to_i
+		
 	end
 
 	def format_direction
